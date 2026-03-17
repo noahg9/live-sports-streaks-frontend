@@ -29,6 +29,9 @@ function App() {
 
   const sports = [...new Set(streaks.filter(s => s.sport).map(s => s.sport))].sort()
   const filteredStreaks = activeTab === 'all' ? streaks : streaks.filter(s => s.sport === activeTab)
+  const maxLength = filteredStreaks.length > 0
+    ? Math.max(...filteredStreaks.map(s => typeof s.length === 'number' ? s.length : 0))
+    : 0
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -52,7 +55,7 @@ function App() {
         ))}
       </div>
 
-      <StreakTable streaks={filteredStreaks} />
+      <StreakTable streaks={filteredStreaks} maxLength={maxLength} />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-function StreakTable({ streaks }) {
+function StreakTable({ streaks, maxLength = 0 }) {
   if (!streaks || !Array.isArray(streaks) || streaks.length === 0) {
     return <p className="text-gray-500">No streaks available.</p>
   }
@@ -16,7 +16,7 @@ function StreakTable({ streaks }) {
       </thead>
       <tbody>
         {streaks.map((s, i) => (
-          <tr key={i} className="border-t">
+          <tr key={i} className={`border-t${s.length === maxLength && maxLength > 0 ? ' bg-yellow-100 font-semibold' : ''}`}>
             <td className="px-4 py-2">{s.name}</td>
             <td className="px-4 py-2">{s.entity_type}</td>
             <td className="px-4 py-2">{s.sport}</td>
