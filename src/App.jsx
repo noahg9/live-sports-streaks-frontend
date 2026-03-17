@@ -6,8 +6,10 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const apiBase = import.meta.env.VITE_API_BASE_URL ?? ''
+
   useEffect(() => {
-    fetch('/streaks')
+    fetch(`${apiBase}/streaks`)
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json()
