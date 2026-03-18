@@ -53,7 +53,7 @@ function StreakTable({ streaks, maxLength = 0 }) {
                 <td className="px-5 py-3.5">
                   <div className="font-semibold text-white leading-tight">{s.name}</div>
                   <div className="text-xs text-gray-500 mt-0.5 capitalize">
-                    {s.entity_type} · {s.sport}
+                    {s.entity_type} · {s.sport}{s.league && <> · <span className="text-gray-600">{s.league}</span></>}
                     <span className={`ml-2 sm:hidden px-1.5 py-0.5 rounded-full text-xs font-medium capitalize ${style.pill}`}>
                       {s.streak_type}
                     </span>
