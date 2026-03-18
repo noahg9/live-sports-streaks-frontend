@@ -106,7 +106,7 @@ function App() {
           <h1 className="text-4xl font-bold tracking-tight">Sports Streaks</h1>
           <p className="text-gray-400 text-sm mt-2">
             {activeStreaks.length} active streak{activeStreaks.length !== 1 ? 's' : ''} across {sports.length} sport{sports.length !== 1 ? 's' : ''}
-            {lastUpdated && <> · Updated {lastUpdated.toLocaleString()}</>}
+            {lastUpdated && <> · Last fetched {lastUpdated.toLocaleString()}</>}
           </p>
         </div>
 

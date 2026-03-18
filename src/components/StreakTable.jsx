@@ -12,7 +12,7 @@ function StreakTable({ streaks, maxLength = 0 }) {
     return (
       <div className="bg-gray-900 rounded-2xl p-16 text-center">
         <p className="text-gray-600 text-sm">No active streaks right now.</p>
-        <p className="text-gray-700 text-xs mt-1">Data refreshes every hour.</p>
+        <p className="text-gray-700 text-xs mt-1">Data refreshes at 00:00, 06:00, 12:00, 18:00 UTC.</p>
       </div>
     )
   }
