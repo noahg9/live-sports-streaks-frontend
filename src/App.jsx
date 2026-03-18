@@ -106,9 +106,8 @@ function App() {
           </div>
           <h1 className="text-4xl font-bold tracking-tight">Sports Streaks</h1>
           <p className="text-gray-400 text-sm mt-2">
-            {activeStreaks.length} active streak{activeStreaks.length !== 1 ? 's' : ''} across {sports.length} sport{sports.length !== 1 ? 's' : ''}
-            {' · '}Data from {DATA_FROM}
-            {lastUpdated && <> · Last fetched {lastUpdated.toLocaleString()}</>}
+            {activeStreaks.length} streaks · Since {DATA_FROM}
+            {lastUpdated && <> · Updated {lastUpdated.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} at {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</>}
           </p>
         </div>
 
