@@ -32,7 +32,11 @@ function App() {
       })
       .then(data => {
         setStreaks(data)
-        setLastUpdated(new Date())
+        // Use the most recent last_updated timestamp from the streaks themselves
+        const timestamps = data.map(s => s.last_updated).filter(Boolean)
+        if (timestamps.length > 0) {
+          setLastUpdated(new Date(timestamps.sort().at(-1)))
+        }
         setLoading(false)
       })
       .catch(err => {
@@ -102,7 +106,7 @@ function App() {
           <h1 className="text-4xl font-bold tracking-tight">Sports Streaks</h1>
           <p className="text-gray-400 text-sm mt-2">
             {activeStreaks.length} active streak{activeStreaks.length !== 1 ? 's' : ''} across {sports.length} sport{sports.length !== 1 ? 's' : ''}
-            {lastUpdated && <> · {lastUpdated.toLocaleTimeString()}</>}
+            {lastUpdated && <> · Updated {lastUpdated.toLocaleString()}</>}
           </p>
         </div>
 
