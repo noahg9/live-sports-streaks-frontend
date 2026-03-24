@@ -22,8 +22,6 @@ function App() {
   const [activeStreakType, setActiveStreakType] = useState('all')
   const [search, setSearch] = useState('')
   const [lastUpdated, setLastUpdated] = useState(null)
-  const DATA_FROM = 'Mar 17, 2026'
-
   useEffect(() => {
     const apiBase = import.meta.env.VITE_API_BASE_URL ?? ''
     fetch(`${apiBase}/streaks`)
@@ -106,8 +104,8 @@ function App() {
           </div>
           <h1 className="text-4xl font-bold tracking-tight">Sports Streaks</h1>
           <p className="text-gray-400 text-sm mt-2">
-            {activeStreaks.length} streaks · Since {DATA_FROM}
-            {lastUpdated && <> · Updated {lastUpdated.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} at {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</>}
+            {activeStreaks.length} streaks
+            {lastUpdated && <> · Updated {lastUpdated.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</>}
           </p>
         </div>
 
