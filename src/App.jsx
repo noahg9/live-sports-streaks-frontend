@@ -21,7 +21,6 @@ function App() {
   const [activeLeague, setActiveLeague] = useState('all')
   const [activeStreakType, setActiveStreakType] = useState('all')
   const [search, setSearch] = useState('')
-  const [lastUpdated, setLastUpdated] = useState(null)
   useEffect(() => {
     const apiBase = import.meta.env.VITE_API_BASE_URL ?? ''
     fetch(`${apiBase}/streaks`)
@@ -32,10 +31,6 @@ function App() {
       .then(data => {
         setStreaks(data)
         // Use the most recent last_updated timestamp from the streaks themselves
-        const timestamps = data.map(s => s.last_updated).filter(Boolean)
-        if (timestamps.length > 0) {
-          setLastUpdated(new Date(timestamps.sort().at(-1)))
-        }
         setLoading(false)
       })
       .catch(err => {
@@ -103,10 +98,6 @@ function App() {
             <span className="text-xs font-semibold text-green-400 uppercase tracking-widest">Live Data</span>
           </div>
           <h1 className="text-4xl font-bold tracking-tight">Sports Streaks</h1>
-          <p className="text-gray-400 text-sm mt-2">
-            {activeStreaks.length} streaks
-            {lastUpdated && <> · Updated {lastUpdated.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</>}
-          </p>
         </div>
 
         {/* Sport tabs */}
