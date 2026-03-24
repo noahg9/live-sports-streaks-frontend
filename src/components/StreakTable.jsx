@@ -1,91 +1,62 @@
-const MEDALS = ['🥇', '🥈', '🥉']
-
-const STREAK_STYLES = {
-  win:      { pill: 'bg-emerald-950 text-emerald-400 ring-1 ring-emerald-800', bar: 'bg-emerald-500' },
-  unbeaten: { pill: 'bg-blue-950 text-blue-400 ring-1 ring-blue-800',         bar: 'bg-blue-500'    },
+const TYPE_STYLES = {
+  win:      { dot: 'bg-emerald-400', text: 'text-emerald-400' },
+  unbeaten: { dot: 'bg-blue-400',    text: 'text-blue-400'    },
 }
 
-const DEFAULT_STYLE = { pill: 'bg-gray-800 text-gray-300', bar: 'bg-gray-500' }
+function streakColor(length) {
+  if (length >= 15) return 'text-red-400'
+  if (length >= 8)  return 'text-orange-400'
+  return 'text-white'
+}
 
-function StreakTable({ streaks, maxLength = 0 }) {
+function StreakTable({ streaks }) {
   if (!streaks || streaks.length === 0) {
     return (
-      <div className="bg-gray-900 rounded-2xl p-16 text-center">
-        <p className="text-gray-600 text-sm">No active streaks right now.</p>
-        <p className="text-gray-700 text-xs mt-1">Data refreshes at 00:00, 06:00, 12:00, 18:00 UTC.</p>
+      <div className="py-16 text-center">
+        <p className="text-gray-500 text-sm">No active streaks right now.</p>
+        <p className="text-gray-700 text-xs mt-1">Data refreshes every 6 hours.</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-gray-900 rounded-2xl overflow-hidden ring-1 ring-white/5">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-gray-800/60 text-gray-500 text-xs uppercase tracking-wider">
-            <th className="px-5 py-3 text-center w-12">#</th>
-            <th className="px-5 py-3 text-left">Name</th>
-            <th className="px-5 py-3 text-left hidden sm:table-cell">Type</th>
-            <th className="px-5 py-3 text-right">Streak</th>
-          </tr>
-        </thead>
-        <tbody>
-          {streaks.map((s, i) => {
-            const style = STREAK_STYLES[s.streak_type] ?? DEFAULT_STYLE
-            const barPct = maxLength > 0 ? Math.round((s.length / maxLength) * 100) : 0
-            const isFirst = i === 0
+    <div className="space-y-1.5">
+      {streaks.map((s, i) => {
+        const style = TYPE_STYLES[s.streak_type] ?? { dot: 'bg-gray-500', text: 'text-gray-400' }
+        return (
+          <div
+            key={i}
+            className="flex items-center gap-4 px-4 py-3.5 rounded-xl bg-gray-900 hover:bg-gray-800/80 transition-colors"
+          >
+            <span className="text-gray-700 text-xs tabular-nums w-4 shrink-0 text-right">{i + 1}</span>
 
-            return (
-              <tr
-                key={i}
-                className={`border-t border-white/5 transition-colors hover:bg-white/5 ${
-                  isFirst ? 'bg-yellow-500/5' : ''
-                }`}
-              >
-                {/* Rank */}
-                <td className="px-5 py-3.5 text-center">
-                  {i < 3
-                    ? <span className="text-base leading-none">{MEDALS[i]}</span>
-                    : <span className="text-gray-600 text-xs tabular-nums">{i + 1}</span>
-                  }
-                </td>
+            <div className="w-44 shrink-0 min-w-0">
+              <div className="font-medium text-white truncate">{s.name}</div>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${style.dot}`} />
+                <span className={`text-xs capitalize ${style.text}`}>{s.streak_type}</span>
+                <span className="text-gray-700 text-xs">·</span>
+                <span className="text-xs text-gray-500 capitalize truncate">
+                  {s.sport}{s.league && ` · ${s.league}`}
+                </span>
+              </div>
+            </div>
 
-                {/* Name */}
-                <td className="px-5 py-3.5">
-                  <div className="font-semibold text-white leading-tight">{s.name}</div>
-                  <div className="text-xs text-gray-500 mt-0.5 capitalize">
-                    {s.entity_type} · {s.sport}{s.league && <> · <span className="text-gray-600">{s.league}</span></>}
-                    <span className={`ml-2 sm:hidden px-1.5 py-0.5 rounded-full text-xs font-medium capitalize ${style.pill}`}>
-                      {s.streak_type}
-                    </span>
-                  </div>
-                </td>
+            <div className="flex-1 flex items-center gap-1 flex-wrap">
+              {Array.from({ length: Math.min(s.length, 20) }).map((_, j) => (
+                <span key={j} className={`w-2 h-2 rounded-sm shrink-0 ${style.dot}`} />
+              ))}
+              {s.length > 20 && (
+                <span className={`text-xs font-medium ${style.text}`}>+{s.length - 20}</span>
+              )}
+            </div>
 
-                {/* Streak type badge — hidden on mobile (shown inline above) */}
-                <td className="px-5 py-3.5 hidden sm:table-cell">
-                  <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize ${style.pill}`}>
-                    {s.streak_type}
-                  </span>
-                </td>
-
-                {/* Length + bar */}
-                <td className="px-5 py-3.5">
-                  <div className="flex items-center justify-end gap-3">
-                    <div className="w-20 bg-gray-800 rounded-full h-1.5 hidden md:block overflow-hidden">
-                      <div
-                        className={`h-1.5 rounded-full transition-all ${style.bar}`}
-                        style={{ width: `${barPct}%` }}
-                      />
-                    </div>
-                    <span className={`font-bold tabular-nums text-base w-6 text-right ${isFirst ? 'text-yellow-400' : 'text-white'}`}>
-                      {s.length}
-                    </span>
-                  </div>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+            <span className={`text-2xl font-bold tabular-nums shrink-0 w-8 text-right ${streakColor(s.length)}`}>
+              {s.length}
+            </span>
+          </div>
+        )
+      })}
     </div>
   )
 }
