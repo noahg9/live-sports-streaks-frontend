@@ -2,23 +2,23 @@ import { useState, useEffect } from 'react'
 import StreakTable from './components/StreakTable'
 
 const SPORT_LABELS = {
-  nfl:        'NFL',
-  mma:        'MMA',
-  nba:        'NBA',
-  afl:        'AFL',
+  american_football: 'American Football',
+  mma:               'MMA',
+  nba:               'NBA',
+  afl:               'AFL',
 }
 
 const SPORT_ICONS = {
-  football:   '⚽',
-  basketball: '🏀',
-  baseball:   '⚾',
-  hockey:     '🏒',
-  rugby:      '🏉',
-  volleyball: '🏐',
-  handball:   '🤾',
-  nfl:        '🏈',
-  tennis:     '🎾',
-  mma:        '🥊',
+  football:          '⚽',
+  basketball:        '🏀',
+  baseball:          '⚾',
+  hockey:            '🏒',
+  rugby:             '🏉',
+  volleyball:        '🏐',
+  handball:          '🤾',
+  american_football: '🏈',
+  tennis:            '🎾',
+  mma:               '🥊',
 }
 
 function App() {

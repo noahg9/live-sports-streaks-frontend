@@ -4,7 +4,7 @@ const mockStreaks = [
   { entity_type: 'team', name: 'Golden State Warriors', sport: 'basketball', league: 'NBA',               streak_type: 'win',      length: 10 },
   { entity_type: 'team', name: 'New York Yankees',   sport: 'baseball',   league: 'MLB',                  streak_type: 'win',      length: 9  },
   { entity_type: 'team', name: 'Bayern Munich',      sport: 'football',   league: 'Bundesliga',           streak_type: 'win',      length: 8  },
-  { entity_type: 'team', name: 'Kansas City Chiefs', sport: 'nfl',        league: 'NFL',                  streak_type: 'win',      length: 7  },
+  { entity_type: 'team', name: 'Kansas City Chiefs', sport: 'american_football',        league: 'NFL',                  streak_type: 'win',      length: 7  },
   { entity_type: 'team', name: 'Boston Celtics',     sport: 'basketball', league: 'NBA',                  streak_type: 'win',      length: 7  },
   { entity_type: 'team', name: 'Barcelona',          sport: 'football',   league: 'La Liga',              streak_type: 'unbeaten', length: 6  },
   { entity_type: 'team', name: 'Toronto Maple Leafs', sport: 'hockey',   league: 'NHL',                  streak_type: 'win',      length: 6  },
