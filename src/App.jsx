@@ -69,7 +69,11 @@ function App() {
     ? activeStreaks
     : activeStreaks.filter(s => s.sport === activeTab)
 
-  const leagues = [...new Set(bySport.filter(s => s.league).map(s => s.league))].sort()
+  const leagueCounts = bySport.reduce((acc, s) => {
+    if (s.league) acc[s.league] = (acc[s.league] ?? 0) + 1
+    return acc
+  }, {})
+  const leagues = Object.keys(leagueCounts).filter(l => leagueCounts[l] >= 3).sort()
 
   const handleTabChange = (tab) => {
     setActiveTab(tab)
