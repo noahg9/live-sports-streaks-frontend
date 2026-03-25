@@ -3,6 +3,7 @@ import StreakTable from './components/StreakTable'
 
 const SPORT_LABELS = {
   american_football: 'American Football',
+  nfl:               'American Football',
   mma:               'MMA',
   nba:               'NBA',
   afl:               'AFL',
@@ -17,6 +18,7 @@ const SPORT_ICONS = {
   volleyball:        '🏐',
   handball:          '🤾',
   american_football: '🏈',
+  nfl:               '🏈',
   tennis:            '🎾',
   mma:               '🥊',
 }
