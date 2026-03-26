@@ -2,25 +2,37 @@ import { useState, useEffect } from 'react'
 import StreakTable from './components/StreakTable'
 
 const SPORT_LABELS = {
-  american_football: 'American Football',
-  nfl:               'American Football',
-  mma:               'MMA',
-  nba:               'NBA',
-  afl:               'AFL',
+  american_football:  'American Football',
+  nfl:                'American Football',
+  mma:                'MMA',
+  nba:                'NBA',
+  afl:                'AFL',
+  fighting:           'Fighting',
+  australian_football: 'Australian Football',
+  motorsport:         'Motorsport',
+  rugby_union:        'Rugby Union',
 }
 
 const SPORT_ICONS = {
-  football:          '⚽',
-  basketball:        '🏀',
-  baseball:          '⚾',
-  hockey:            '🏒',
-  rugby:             '🏉',
-  volleyball:        '🏐',
-  handball:          '🤾',
-  american_football: '🏈',
-  nfl:               '🏈',
-  tennis:            '🎾',
-  mma:               '🥊',
+  football:           '⚽',
+  basketball:         '🏀',
+  baseball:           '⚾',
+  hockey:             '🏒',
+  rugby:              '🏉',
+  rugby_union:        '🏉',
+  volleyball:         '🏐',
+  handball:           '🤾',
+  american_football:  '🏈',
+  nfl:                '🏈',
+  tennis:             '🎾',
+  mma:                '🥊',
+  fighting:           '🥊',
+  australian_football: '🏉',
+  motorsport:         '🏎️',
+  darts:              '🎯',
+  golf:               '⛳',
+  snooker:            '🎱',
+  cycling:            '🚴',
 }
 
 function App() {
